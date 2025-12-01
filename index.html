@@ -47,8 +47,7 @@
                 radial-gradient(circle at 90% 80%, rgba(0, 212, 255, 0.05) 0%, transparent 20%);
         }
 
-        /* Animasi masuk untuk konten */
-        @keyframes fadeInUp {
+              @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
@@ -579,8 +578,7 @@
                 font-size: 13px;
             }
         }
-
-        /* Efek partikel */
+        
         .particle {
             position: fixed;
             border-radius: 50%;
@@ -591,7 +589,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- Logo dengan efek glow -->
         <div class="logo-container">
             <div class="logo-glow"></div>
             <img src="https://files.catbox.moe/8amcnm.webp" alt="Logo Depstore" class="logo">
@@ -603,7 +600,6 @@
             <p class="subtitle">Pilih metode pembayaran yang tersedia di bawah ini</p>
         </div>
         
-        <!-- Kartu-kartu pembayaran -->
         <div class="payment-cards">
             <!-- QRIS -->
             <div class="card qris">
@@ -684,8 +680,7 @@
                 </button>
             </div>
         </div>
-        
-        <!-- Instruksi -->
+      
         <div class="instruction">
             <h3><i data-lucide="info"></i> Cara Pembayaran</h3>
             <ol>
@@ -721,10 +716,8 @@
     </div>
     
     <script>
-        // Inisialisasi ikon Lucide
         lucide.createIcons();
         
-        // Efek partikel latar belakang
         function createParticles() {
             const colors = ['#8a2be2', '#00d4ff', '#ffffff'];
             const particleCount = 20;
@@ -754,24 +747,23 @@
             }
         }
         
-        // Fungsi copy nomor yang FIXED
         function copyToClipboard(text, method) {
-            // Coba Clipboard API modern dulu
+     
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(text).then(() => {
                     showSuccessToast(`Nomor ${method} berhasil disalin!`);
                 }).catch(err => {
                     console.error('Clipboard API gagal:', err);
-                    // Fallback ke metode lama
+         
                     useFallbackCopy(text, method);
                 });
             } else {
-                // Browser lama atau konteks tidak aman
+          
                 useFallbackCopy(text, method);
             }
         }
         
-        // Fallback copy untuk browser lama
+    
         function useFallbackCopy(text, method) {
             const textArea = document.createElement("textarea");
             textArea.value = text;
@@ -797,29 +789,28 @@
             }
         }
         
-        // Toast untuk sukses
+      
         function showSuccessToast(message) {
             showToast(message, 'success');
         }
-        
-        // Toast untuk error
+      
         function showErrorToast(message) {
             showToast(message, 'error');
         }
         
-        // Fungsi toast notification utama
+ 
         function showToast(message, type = 'success') {
             const toast = document.getElementById("toast");
             const toastMessage = document.getElementById("toast-message");
             
-            // Atur pesan
+         
             toastMessage.textContent = message;
             
-            // Reset dan set class
+         
             toast.className = "toast";
             toast.classList.add(type);
             
-            // Update ikon
+        
             const icon = toast.querySelector('i');
             if (type === 'success') {
                 icon.setAttribute('data-lucide', 'check-circle');
@@ -829,21 +820,21 @@
                 icon.style.color = '#ef4444';
             }
             
-            // Refresh ikon
+    
             lucide.createIcons();
             
-            // Tampilkan toast
+     
             setTimeout(() => {
                 toast.classList.add("show");
             }, 10);
             
-            // Sembunyikan setelah 3 detik
+ 
             setTimeout(() => {
                 toast.classList.remove("show");
             }, 3000);
         }
         
-        // Fungsi modal QRIS
+     
         function openModal() {
             document.getElementById("qrisModal").classList.add("show");
             document.body.style.overflow = "hidden";
@@ -854,25 +845,24 @@
             document.body.style.overflow = "auto";
         }
         
-        // Event listeners
+   
         document.addEventListener('DOMContentLoaded', function() {
             createParticles();
-            
-            // Tutup modal dengan Escape
+          
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     closeModal();
                 }
             });
             
-            // Tutup modal dengan klik di luar
+       
             document.getElementById('qrisModal').addEventListener('click', (e) => {
                 if (e.target.id === 'qrisModal') {
                     closeModal();
                 }
             });
-            
-            // Efek hover pada kartu
+           
+       
             document.querySelectorAll('.card').forEach(card => {
                 card.addEventListener('mouseenter', function() {
                     this.style.transform = 'translateY(-10px)';
@@ -882,16 +872,14 @@
                     this.style.transform = 'translateY(0)';
                 });
             });
-            
-            // Animasi logo
+         
+           
             const logo = document.querySelector('.logo');
             logo.style.animation = 'fadeInUp 1s ease-out, float 6s ease-in-out 1s infinite';
-            
-            // Test copy function on load
+     
             console.log('Payment page loaded successfully!');
         });
         
-        // Test function untuk debug
         function testCopy() {
             copyToClipboard('08113095566', 'TEST');
         }
